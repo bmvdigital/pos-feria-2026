@@ -141,7 +141,7 @@ const Clients = ({ user }) => {
     if (loading) return <div style={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}><Loader2 className="animate-spin" size={40} color="var(--primary)" /></div>;
 
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'minmax(350px, 1fr) 2fr', gap: '24px', height: 'calc(100vh - 160px)' }}>
+        <div className="clients-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '24px', minHeight: 'calc(100vh - 160px)' }}>
 
             {/* Sidebar: Lista de Clientes */}
             <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>

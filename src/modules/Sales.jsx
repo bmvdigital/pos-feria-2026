@@ -188,7 +188,7 @@ const Sales = ({ user }) => {
     if (loading) return <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', color: 'var(--primary)', fontWeight: 800 }}>CARGANDO SISTEMA DE VENTAS...</div>;
 
     return (
-        <div className="sales-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '24px', minHeight: 'calc(100vh - 160px)' }}>
+        <div className="sales-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', minHeight: 'calc(100vh - 160px)' }}>
             <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
                 <div style={{ padding: '20px', borderBottom: '1px solid #eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '15px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>

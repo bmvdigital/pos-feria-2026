@@ -91,7 +91,7 @@ const Audit = ({ user }) => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '30px' }}>
+            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '30px', flexWrap: 'wrap', gap: '20px' }}>
                 <div>
                     <h1 style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                         <ShieldCheck size={32} color="var(--primary)" /> Centro de Auditoría
@@ -126,8 +126,8 @@ const Audit = ({ user }) => {
                     </div>
                 </div>
 
-                <div style={{ overflowX: 'auto' }}>
-                    <table style={{ width: '100%', borderCollapse: 'separate', borderSpacing: '0 10px' }}>
+                <div className="table-responsive">
+                    <table style={{ width: '100%', minWidth: '800px', borderCollapse: 'separate', borderSpacing: '0 10px' }}>
                         <thead>
                             <tr style={{ textAlign: 'left', color: '#999', fontSize: '0.8rem' }}>
                                 <th style={{ padding: '10px 15px' }}>FECHA Y HORA</th>

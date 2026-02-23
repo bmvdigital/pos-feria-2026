@@ -126,11 +126,11 @@ const Orders = ({ user }) => {
     if (view === 'pos') {
         return (
             <div style={{ padding: '0px' }}>
-                <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', flexWrap: 'wrap', gap: '10px' }}>
                     <button onClick={() => setView('list')} className="btn-premium btn-secondary" style={{ padding: '8px 15px' }}><ArrowLeft size={18} /> Volver</button>
                     <h2 style={{ margin: 0 }}>Levantar Pedido</h2>
                 </header>
-                <div className="sales-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '20px' }}>
+                <div className="sales-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
                     <div className="glass-card" style={{ padding: '20px' }}>
                         <select value={selectedWarehouse} onChange={(e) => setSelectedWarehouse(e.target.value)} style={{ padding: '10px', borderRadius: '10px', width: '200px', marginBottom: '20px' }}>
                             <option value="Principal">Almacén Principal</option>

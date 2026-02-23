@@ -210,14 +210,14 @@ const Inventory = ({ user }) => {
 
     return (
         <div style={{ padding: '0px' }}>
-            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }}>
+            <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap', gap: '20px' }}>
                 <div>
                     <h1>Inventarios 📦</h1>
                     <p style={{ color: 'var(--text-muted)' }}>Gestión avanzada de productos y auditoría de utilidad</p>
                 </div>
-                <div style={{ display: 'flex', gap: '10px' }}>
+                <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                     <button className="btn-premium btn-secondary" onClick={() => { setIsEditing(false); setProductForm(initialProductForm); setShowProductModal(true); }}><Plus size={18} /> Nuevo Producto</button>
-                    <button className="btn-premium btn-primary" onClick={fetchHistory}><ClipboardList size={18} /> Auditoría de Movimientos</button>
+                    <button className="btn-premium btn-primary" onClick={fetchHistory}><ClipboardList size={18} /> Movimientos</button>
                 </div>
             </header>
 
@@ -247,9 +247,9 @@ const Inventory = ({ user }) => {
             </div>
 
             <div className="glass-card" style={{ padding: '25px', minHeight: '400px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '25px', flexWrap: 'wrap', gap: '15px' }}>
                     <h3>Existencias en {selectedWarehouse?.name}</h3>
-                    <div style={{ position: 'relative', width: '300px' }}>
+                    <div style={{ position: 'relative', width: '100%', maxWidth: '300px' }}>
                         <Search style={{ position: 'absolute', left: '12px', top: '10px', color: '#999' }} size={18} />
                         <input
                             type="text"
@@ -261,7 +261,7 @@ const Inventory = ({ user }) => {
                     </div>
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
+                <div className="inventory-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' }}>
                     {filteredStock.map(item => {
                         const utility = item.products.price - (item.products.purchase_price || 0);
                         const utilityPercent = item.products.purchase_price > 0 ? ((utility / item.products.purchase_price) * 100).toFixed(0) : 0;

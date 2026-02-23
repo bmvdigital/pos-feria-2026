@@ -82,7 +82,7 @@ const Logistics = ({ user }) => {
                 <p style={{ color: 'var(--text-muted)' }}>Despacho de pedidos y control de flota</p>
             </header>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 350px', gap: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
                 <div className="glass-card" style={{ padding: '20px', minHeight: '500px' }}>
                     <h3 style={{ marginBottom: '20px' }}>Cola de Entrega</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>

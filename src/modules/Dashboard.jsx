@@ -143,11 +143,11 @@ const Dashboard = ({ user }) => {
                     <h1>Panel Financiero & Utilidad 📊</h1>
                     <p style={{ color: 'var(--text-muted)' }}>Métricas de rentabilidad en tiempo real • Feria 2026</p>
                 </div>
-                <div style={{ display: 'flex', gap: '12px' }}>
-                    <button onClick={downloadReport} className="btn-premium btn-secondary" style={{ padding: '10px 20px' }}>
-                        <Download size={18} /> Reporte Ejecutiva
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                    <button onClick={downloadReport} className="btn-premium btn-secondary" style={{ padding: '10px 20px', flex: '1 1 auto' }}>
+                        <Download size={18} /> Reporte
                     </button>
-                    <div style={{ padding: '10px 20px', background: 'white', borderRadius: '15px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div style={{ padding: '10px 20px', background: 'var(--surface)', borderRadius: '15px', border: '1px solid #eee', display: 'flex', alignItems: 'center', gap: '10px', flex: '1 1 auto' }}>
                         <Calendar size={18} color="var(--primary)" />
                         <span style={{ fontWeight: 800 }}>En Producción</span>
                     </div>
@@ -198,7 +198,7 @@ const Dashboard = ({ user }) => {
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '30px' }}>
+            <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px', marginBottom: '30px' }}>
                 <KpiCard icon={<DollarSign color="#22c55e" />} label="Efectivo Generado" value={`$${(stats.totalSales - stats.receivablesTotal).toLocaleString()}`} trend="Real" />
                 <KpiCard icon={<ShoppingBag color="var(--primary)" />} label="Transacciones" value={stats.salesCount} trend="Ventas" />
                 <KpiCard
@@ -212,7 +212,7 @@ const Dashboard = ({ user }) => {
                 <KpiCard icon={<Briefcase color="#ef4444" />} label="Pedidos" value={stats.pendingOrders} trend="Pend." />
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '24px', marginBottom: '24px' }}>
+            <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '24px' }}>
                 <div className="glass-card" style={{ padding: '25px', height: '400px' }}>
                     <h3 style={{ marginBottom: '20px' }}>Histórico de Ingresos</h3>
                     <ResponsiveContainer width="100%" height="80%">
@@ -246,7 +246,7 @@ const Dashboard = ({ user }) => {
                 </div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
                 <div className="glass-card" style={{ padding: '25px' }}>
                     <h3 style={{ marginBottom: '20px' }}>Top Clientes (Compras)</h3>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>

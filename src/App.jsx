@@ -35,8 +35,20 @@ import Login from './modules/Login';
 
 const App = () => {
   const [user, setUser] = useState(null);
-  const [isSidebarOpen, setSidebarOpen] = useState(true);
+  const [isSidebarOpen, setSidebarOpen] = useState(window.innerWidth > 1024);
   const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem('theme') === 'dark');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1024) {
+        setSidebarOpen(false);
+      } else {
+        setSidebarOpen(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
@@ -55,15 +67,30 @@ const App = () => {
         <AnimatePresence>
           {isSidebarOpen && (
             <motion.aside
-              initial={{ x: -260 }}
+              initial={{ x: -280 }}
               animate={{ x: 0 }}
-              exit={{ x: -260 }}
-              className="sidebar glass-card"
-              style={{ width: 'var(--sidebar-width)', height: '100vh', position: 'sticky', top: 0, zIndex: 100, borderRadius: 0 }}
+              exit={{ x: -280 }}
+              className="sidebar"
+              style={{
+                width: 'var(--sidebar-width)',
+                background: 'var(--surface)',
+                height: '100vh',
+                position: window.innerWidth <= 1024 ? 'fixed' : 'sticky',
+                top: 0,
+                zIndex: 2000,
+                padding: '24px 0',
+                boxShadow: window.innerWidth <= 1024 ? '10px 0 30px rgba(0,0,0,0.1)' : 'none',
+                borderRadius: 0
+              }}
             >
-              <div style={{ padding: '24px', textAlign: 'center' }}>
-                <h2 style={{ color: 'var(--primary)', letterSpacing: '2px' }}>SECURE SALES</h2>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Feria Tabasco 2026</p>
+              <div style={{ padding: '0 24px', marginBottom: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                  <h2 style={{ fontSize: '1.2rem', margin: 0 }}>VibeSales</h2>
+                  <p style={{ fontSize: '0.6rem', color: '#999', letterSpacing: '2px', fontWeight: 900 }}>FERIA 2026</p>
+                </div>
+                {window.innerWidth <= 1024 && (
+                  <button onClick={() => setSidebarOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text-main)' }}><X size={20} /></button>
+                )}
               </div>
 
               <nav style={{ padding: '12px' }}>
@@ -113,10 +140,11 @@ const App = () => {
         </AnimatePresence>
 
         {/* Content */}
-        <main className="content-area">
-          <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-            <button onClick={() => setSidebarOpen(!isSidebarOpen)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-main)' }}>
+        <main className="content-area" onClick={() => window.innerWidth <= 1024 && isSidebarOpen && setSidebarOpen(false)}>
+          <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px', flexWrap: 'wrap', gap: '15px' }}>
+            <button onClick={(e) => { e.stopPropagation(); setSidebarOpen(!isSidebarOpen); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-main)', display: 'flex', alignItems: 'center', gap: '10px' }}>
               {isSidebarOpen ? <X /> : <Menu />}
+              <span style={{ fontWeight: 800, fontSize: '0.8rem' }}>MENÚ</span>
             </button>
           </header>
 

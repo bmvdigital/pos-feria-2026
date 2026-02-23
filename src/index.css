@@ -194,10 +194,65 @@ h3 {
 @media (max-width: 768px) {
   .content-area {
     padding: 12px;
+    padding-top: 60px;
+    /* Space for mobile header if needed */
   }
 
+  /* Grid Reset */
   .dashboard-grid,
-  .sales-grid {
+  .sales-grid,
+  .inventory-grid,
+  .clients-grid {
     grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Modal Fixes */
+  .glass-card {
+    border-radius: 12px;
+  }
+
+  div[style*="fixed"]>div[style*="width: 100%"] {
+    width: 95% !important;
+    padding: 20px !important;
+  }
+
+  /* Responsive Tables */
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Text Adjustments */
+  h1 {
+    font-size: 1.8rem !important;
+  }
+
+  h2 {
+    font-size: 1.4rem !important;
+  }
+
+  .btn-premium {
+    padding: 10px 16px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Base Utility for Flex/Grid stacking */
+.flex-stack-mobile {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .flex-stack-mobile {
+    flex-direction: column !important;
+  }
+
+  .flex-stack-mobile>* {
+    width: 100% !important;
   }
 }
