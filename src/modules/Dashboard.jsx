@@ -154,9 +154,9 @@ const Dashboard = ({ user }) => {
                 </div>
             </header>
 
-            {/* FULL WIDTH UTILITY HIGHLIGHT */}
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', marginBottom: '30px' }}>
-                <div className="glass-card" style={{ padding: '30px', background: 'linear-gradient(135deg, var(--secondary), #152c4b)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {/* TOP CARDS: UTILIDAD & META */}
+            <div className="dashboard-top-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '24px', marginBottom: '30px' }}>
+                <div className="glass-card" style={{ padding: '30px', background: 'linear-gradient(135deg, var(--secondary), #152c4b)', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', order: 1 }}>
                     <div>
                         <p style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', opacity: 0.8, letterSpacing: '2px' }}>UTILIDAD BRUTA TOTAL</p>
                         <h2 style={{ fontSize: '3.5rem', fontWeight: 900, color: 'var(--primary)', margin: '10px 0', textShadow: '0 0 20px rgba(197, 160, 89, 0.3)' }}>
@@ -182,7 +182,7 @@ const Dashboard = ({ user }) => {
                     </div>
                 </div>
 
-                <div className="glass-card" style={{ padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div className="glass-card" style={{ padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: 2 }}>
                     <p style={{ fontSize: '0.75rem', fontWeight: 800, color: '#999', marginBottom: '15px' }}>RECAUDACIÓN VS META ($12.5M)</p>
                     <div style={{ display: 'flex', alignItems: 'flex-end', gap: '10px', marginBottom: '10px' }}>
                         <span style={{ fontSize: '2.5rem', fontWeight: 900 }}>{goalPercentage.toFixed(1)}%</span>

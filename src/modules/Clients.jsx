@@ -176,7 +176,7 @@ const Clients = ({ user }) => {
                     </div>
                 </div>
 
-                <div style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
+                <div className="mobile-scroll-list" style={{ flex: 1, overflowY: 'auto', padding: '10px' }}>
                     {filteredClients.map(client => (
                         <motion.div
                             key={client.id}

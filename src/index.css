@@ -18,11 +18,13 @@
   --glass-border: rgba(255, 255, 255, 0.3);
   --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 
-  /* Layout */
-  --sidebar-width: 260px;
+  /* Sidebar */
+  --sidebar-width: 280px;
   --navbar-height: 70px;
   --radius-lg: 16px;
   --radius-md: 12px;
+  --sidebar-z: 3000;
+  --backdrop-bg: rgba(0, 0, 0, 0.4);
 
   /* Transitions */
   --transition-fast: 0.2s ease;
@@ -226,6 +228,39 @@ h3 {
     -webkit-overflow-scrolling: touch;
   }
 
+  /* List Constraints */
+  .mobile-scroll-list {
+    max-height: 350px !important;
+    overflow-y: auto !important;
+  }
+
+  /* Dashboard Adjustments */
+  .dashboard-top-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mobile Sidebar Fixed */
+  .sidebar-mobile {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 280px !important;
+    z-index: var(--sidebar-z) !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--backdrop-bg);
+    backdrop-filter: blur(4px);
+    z-index: calc(var(--sidebar-z) - 1);
+  }
+
   /* Text Adjustments */
   h1 {
     font-size: 1.8rem !important;
@@ -240,6 +275,7 @@ h3 {
     font-size: 0.8rem;
   }
 }
+
 
 /* Base Utility for Flex/Grid stacking */
 .flex-stack-mobile {

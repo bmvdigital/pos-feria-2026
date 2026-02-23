@@ -66,76 +66,87 @@ const App = () => {
         {/* Sidebar */}
         <AnimatePresence>
           {isSidebarOpen && (
-            <motion.aside
-              initial={{ x: -280 }}
-              animate={{ x: 0 }}
-              exit={{ x: -280 }}
-              className="sidebar"
-              style={{
-                width: 'var(--sidebar-width)',
-                background: 'var(--surface)',
-                height: '100vh',
-                position: window.innerWidth <= 1024 ? 'fixed' : 'sticky',
-                top: 0,
-                zIndex: 2000,
-                padding: '24px 0',
-                boxShadow: window.innerWidth <= 1024 ? '10px 0 30px rgba(0,0,0,0.1)' : 'none',
-                borderRadius: 0
-              }}
-            >
-              <div style={{ padding: '0 24px', marginBottom: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div>
-                  <h2 style={{ fontSize: '1.2rem', margin: 0 }}>VibeSales</h2>
-                  <p style={{ fontSize: '0.6rem', color: '#999', letterSpacing: '2px', fontWeight: 900 }}>FERIA 2026</p>
+            <>
+              {window.innerWidth <= 1024 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSidebarOpen(false)}
+                  className="sidebar-backdrop"
+                />
+              )}
+              <motion.aside
+                initial={{ x: -280 }}
+                animate={{ x: 0 }}
+                exit={{ x: -280 }}
+                transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                className={`sidebar ${window.innerWidth <= 1024 ? 'sidebar-mobile' : ''}`}
+                style={{
+                  width: 'var(--sidebar-width)',
+                  background: 'var(--surface)',
+                  height: '100vh',
+                  position: window.innerWidth <= 1024 ? 'fixed' : 'sticky',
+                  top: 0,
+                  zIndex: 3000,
+                  padding: '24px 0',
+                  borderRadius: 0
+                }}
+              >
+                <div style={{ padding: '0 24px', marginBottom: '40px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div>
+                    <h2 style={{ fontSize: '1.2rem', margin: 0 }}>VibeSales</h2>
+                    <p style={{ fontSize: '0.6rem', color: '#999', letterSpacing: '2px', fontWeight: 900 }}>FERIA 2026</p>
+                  </div>
+                  {window.innerWidth <= 1024 && (
+                    <button onClick={() => setSidebarOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer' }}><X size={20} /></button>
+                  )}
                 </div>
-                {window.innerWidth <= 1024 && (
-                  <button onClick={() => setSidebarOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--text-main)' }}><X size={20} /></button>
-                )}
-              </div>
 
-              <nav style={{ padding: '12px' }}>
-                <SidebarLink to="/" icon={<BarChart3 size={20} />} label="Dashboard" />
-                <SidebarLink to="/ventas" icon={<ShoppingCart size={20} />} label="Ventas" />
-                <SidebarLink to="/pedidos" icon={<PlusCircle size={20} />} label="Pedidos" />
-                <SidebarLink to="/inventario" icon={<Package size={20} />} label="Inventario" />
-                <SidebarLink to="/clientes" icon={<Users size={20} />} label="Clientes" />
-                <SidebarLink to="/logistica" icon={<Truck size={20} />} label="Logística" />
-                {(user?.role?.toLowerCase() === 'master' || user?.role?.toLowerCase() === 'administrador') && (
-                  <SidebarLink to="/auditoria" icon={<ShieldCheck size={20} />} label="Auditoría" />
-                )}
-              </nav>
+                <nav style={{ padding: '12px', flex: 1, overflowY: 'auto' }}>
+                  <SidebarLink to="/" icon={<BarChart3 size={20} />} label="Dashboard" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  <SidebarLink to="/ventas" icon={<ShoppingCart size={20} />} label="Ventas" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  <SidebarLink to="/pedidos" icon={<PlusCircle size={20} />} label="Pedidos" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  <SidebarLink to="/inventario" icon={<Package size={20} />} label="Inventario" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  <SidebarLink to="/clientes" icon={<Users size={20} />} label="Clientes" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  <SidebarLink to="/logistica" icon={<Truck size={20} />} label="Logística" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  {(user?.role?.toLowerCase() === 'master' || user?.role?.toLowerCase() === 'administrador') && (
+                    <SidebarLink to="/auditoria" icon={<ShieldCheck size={20} />} label="Auditoría" onClick={() => window.innerWidth <= 1024 && setSidebarOpen(false)} />
+                  )}
+                </nav>
 
-              <div style={{ position: 'absolute', bottom: '24px', width: '100%', padding: '0 12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 5px 10px 5px' }}>
-                  <p style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-muted)' }}>TEMA DEL SISTEMA</p>
-                  <button
-                    onClick={toggleDarkMode}
-                    style={{
-                      background: 'var(--primary)20',
-                      border: 'none',
-                      borderRadius: '20px',
-                      padding: '4px 12px',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      color: 'var(--primary)',
-                      fontSize: '0.7rem',
-                      fontWeight: 900
-                    }}
-                  >
-                    {isDarkMode ? <><Sun size={12} /> CLARO</> : <><Moon size={12} /> OSCURO</>}
+                <div style={{ padding: '24px 12px', borderTop: '1px solid var(--glass-border)' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                    <p style={{ fontSize: '0.65rem', fontWeight: 800, color: 'var(--text-muted)' }}>TEMA DEL SISTEMA</p>
+                    <button
+                      onClick={toggleDarkMode}
+                      style={{
+                        background: 'var(--primary)20',
+                        border: 'none',
+                        borderRadius: '20px',
+                        padding: '4px 12px',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        color: 'var(--primary)',
+                        fontSize: '0.7rem',
+                        fontWeight: 900
+                      }}
+                    >
+                      {isDarkMode ? <><Sun size={12} /> CLARO</> : <><Moon size={12} /> OSCURO</>}
+                    </button>
+                  </div>
+                  <div className="glass-card" style={{ padding: '12px', marginBottom: '12px', background: 'var(--primary)05' }}>
+                    <p style={{ fontSize: '0.75rem', fontWeight: 800 }}>{user.name}</p>
+                    <p style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{user.role}</p>
+                  </div>
+                  <button className="btn-premium btn-secondary" style={{ width: '100%' }} onClick={() => setUser(null)}>
+                    <LogOut size={18} /> SALIR
                   </button>
                 </div>
-                <div className="glass-card" style={{ padding: '12px', marginBottom: '12px' }}>
-                  <p style={{ fontSize: '0.75rem', fontWeight: 'bold' }}>{user.name}</p>
-                  <p style={{ fontSize: '0.65rem' }}>{user.role}</p>
-                </div>
-                <button className="btn-premium btn-secondary" style={{ width: '100%' }} onClick={() => setUser(null)}>
-                  <LogOut size={18} /> Salir
-                </button>
-              </div>
-            </motion.aside>
+              </motion.aside>
+            </>
           )}
         </AnimatePresence>
 
@@ -164,18 +175,19 @@ const App = () => {
   );
 };
 
-const SidebarLink = ({ to, icon, label }) => (
-  <Link to={to} style={{
+const SidebarLink = ({ to, icon, label, onClick }) => (
+  <Link to={to} onClick={onClick} style={{
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
     padding: '14px',
     textDecoration: 'none',
     color: 'var(--secondary)',
-    fontWeight: 500,
+    fontWeight: 700,
     borderRadius: '12px',
     marginBottom: '4px',
-    transition: '0.2s'
+    transition: '0.2s',
+    fontSize: '0.9rem'
   }} className="nav-link">
     {icon} <span>{label}</span>
   </Link>
